@@ -27,5 +27,5 @@ before_script:
   - "sudo ./.travis/setup_repoman.sh"
 
 script:
-  - cd /var/db/repos/salt-testing
+  - cd /var/db/repos/${OVERLAY_NAME}
   - "/tmp/portage-portage-${PORTAGE_VER}/repoman/bin/repoman ${REPOMAN_FLAGS} --experimental-repository-modules=y -dx full"
