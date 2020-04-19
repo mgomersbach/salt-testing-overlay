@@ -1,0 +1,31 @@
+sudo: required
+
+language: python
+
+python:
+  - pypy
+
+cache:
+  directories:
+    - metadata/md5-cache
+
+env:
+  jobs:
+    - REPOMAN_FLAGS=--include-profiles=default/linux/amd64/17.1
+  global:
+    - PORTAGE_VER=2.3.88
+    - OVERLAY_NAME=salt-testing-overlay
+
+before_install:
+  - sudo apt-get -qq update
+
+install:
+  - pip install lxml PyYAML
+
+before_script:
+  - chmod a+rwx .travis/setup_repoman.sh
+  - "sudo ./.travis/setup_repoman.sh"
+
+script:
+  - cd /var/db/repos/salt-testing
+  - "/tmp/portage-portage-${PORTAGE_VER}/repoman/bin/repoman ${REPOMAN_FLAGS} --experimental-repository-modules=y -dx full"
