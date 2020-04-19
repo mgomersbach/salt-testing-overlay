@@ -18,7 +18,7 @@ if [[ ${PV} == 9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="Apache-2.0"
@@ -74,7 +74,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 		dev-python/virtualenv[${PYTHON_USEDEP}]
 		>=dev-python/mock-2.0.0[${PYTHON_USEDEP}]
 		>=dev-python/boto-2.32.1[${PYTHON_USEDEP}]
-		!x86? ( >=dev-python/boto3-1.2.1[${PYTHON_USEDEP}] )
+		>=dev-python/boto3-1.2.1[${PYTHON_USEDEP}]
 		>=dev-python/moto-0.3.6[${PYTHON_USEDEP}]
 		>=dev-python/SaltTesting-2016.5.11[${PYTHON_USEDEP}]
 		>=dev-python/libcloud-0.14.0[${PYTHON_USEDEP}]
@@ -84,7 +84,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 DOCS=( README.rst AUTHORS )
 
 REQUIRED_USE="|| ( raet zeromq )"
-RESTRICT="!test? ( test ) x86? ( test )"
+RESTRICT="!test? ( test )"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2017.7.0-dont-realpath-tmpdir.patch"
